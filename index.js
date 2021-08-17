@@ -1,5 +1,7 @@
 'use strict';
 
+const formCalculator = document.getElementById('form-grid');
+
 const addBtn = document.getElementById('add-btn');
 const substractBtn = document.getElementById('substract-btn');
 const multiplyBtn = document.getElementById('multiply-btn');
@@ -9,7 +11,8 @@ const nb2 = document.getElementById('nb2');
 
 const opsBtns = document.querySelectorAll('.ops-btn');
 
-console.log(opsBtns);
+const r = document.createElement('p');
+r.id = 'result';
 
 const handleOps = (nb1, nb2, opsType) => {
     let res = '';
@@ -33,8 +36,8 @@ opsBtns.forEach((opsBtn) => {
     opsBtn.addEventListener('click', (e) => {
         e.preventDefault();
         const opsType = opsBtn.id;
-        const r = document.getElementById('result');
         r.innerText = handleOps(nb1, nb2, opsType);
+        formCalculator.appendChild(r);
     });
 });
 
@@ -45,6 +48,7 @@ opsBtns.forEach((opsBtn) => {
             const opsType = opsBtn.id;
             const r = document.getElementById('result');
             r.innerText = handleOps(nb1, nb2, opsType);
+            formCalculator.appendChild(r);
         }
     });
 });
