@@ -1,23 +1,52 @@
 'use strict';
 
 const addBtn = document.getElementById('add-btn');
+const substractBtn = document.getElementById('substract-btn');
+const multiplyBtn = document.getElementById('multiply-btn');
+const divideBtn = document.getElementById('divide-btn');
 const nb1 = document.getElementById('nb1');
 const nb2 = document.getElementById('nb2');
 
-addBtn.addEventListener('click', (e) => {
-    console.log('CLICKED !');
-    e.preventDefault();
-    const result = document.getElementById('result');
-    result.innerText = `Résultat: ${parseInt(nb1.value) + parseInt(nb2.value)}`;
-    console.log('result:', result);
+const opsBtns = document.querySelectorAll('.ops-btn');
+
+console.log(opsBtns);
+
+const handleOps = (nb1, nb2, opsType) => {
+    let res = '';
+
+    if (opsType == 'add-btn') {
+        res = `Résultat: ${parseFloat(nb1.value) + parseFloat(nb2.value)}`;
+    } else if (opsType == 'substract-btn') {
+        res = `Résultat: ${parseFloat(nb1.value) - parseFloat(nb2.value)}`;
+    } else if (opsType == 'multiply-btn') {
+        res = `Résultat: ${parseFloat(nb1.value) * parseFloat(nb2.value)}`;
+    } else if (opsType == 'divide-btn') {
+        res = `Résultat: ${parseFloat(nb1.value) / parseFloat(nb2.value)}`;
+    } else {
+        res = 'Opération inconnue';
+        console.error('Error with ops type');
+    }
+    return res;
+};
+
+opsBtns.forEach((opsBtn) => {
+    opsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const opsType = opsBtn.id;
+        const r = document.getElementById('result');
+        r.innerText = handleOps(nb1, nb2, opsType);
+    });
 });
 
-addBtn.addEventListener("keyup", function(e) {
-    e.preventDefault();
-    if (e.key === 'Enter'){
-        const result = document.getElementById('result');
-        result.innerText = `Résultat: ${parseInt(nb1.value) + parseInt(nb2.value)}`;
-    }
+opsBtns.forEach((opsBtn) => {
+    opsBtn.addEventListener('keyup', function(e) {
+        e.preventDefault();
+        if (e.key === 'Enter'){
+            const opsType = opsBtn.id;
+            const r = document.getElementById('result');
+            r.innerText = handleOps(nb1, nb2, opsType);
+        }
+    });
 });
 
 [nb1, nb2].forEach((nbInputField) => {
