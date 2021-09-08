@@ -13,11 +13,6 @@ label::after {
 label {
     padding: 0.5em;
 }
-/* label::before
-{
-    content: '\a';
-    white-space: pre;
-} */
 
 #form-grid {
     width: max-content;
@@ -61,6 +56,13 @@ label {
     justify-content: space-between;
     padding: 0.1em 0.5em;
     margin: auto;
+}
+
+#reset {
+    grid-column: 2 / span 2;
+    grid-row: 5;
+    margin: 0.75em auto 0.25em;
+    width: max-content;
 }
 
 #result {
